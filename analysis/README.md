@@ -7,13 +7,13 @@ This analysis console offers multiple ways of searching LDAP objects from a JSON
 ## Commands
 
 | Command | Description |
-|---------------------------------|--------------------------------------------------------------|
-| [searchbase](./#)               | Sets the LDAP search base.                                   |
-| [object_by_property_name](./#)  | Search for an object containing a property by name in LDAP.  |
-| [object_by_property_value](./#) | Search for an object containing a property by value in LDAP. |
-| [object_by_dn](./#)             | Search for an object by its distinguishedName in LDAP.       |
-| [help](./#)                     | Displays this help message.                                  |
-| [exit](./#)                     | Exits the script.                                            |
+|-----------------------------------------------------------------|--------------------------------------------------------------|
+| [searchbase](./#searchbase-command)                             | Sets the LDAP search base.                                   |
+| [object_by_property_name](./#object_by_property_name-command)   | Search for an object containing a property by name in LDAP.  |
+| [object_by_property_value](./#object_by_property_value-command) | Search for an object containing a property by value in LDAP. |
+| [object_by_dn](./#object_by_dn-command)                         | Search for an object by its distinguishedName in LDAP.       |
+| [help](./#help-command)                                         | Displays this help message.                                  |
+| [exit](./#exit-command)                                         | Exits the script.                                            |
 
 ### searchbase command
 
