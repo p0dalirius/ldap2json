@@ -11,6 +11,10 @@ The ldap2json script allows you to extract the whole LDAP content of a Windows d
  - [x] Authenticate with kerberos ticket
  - [x] Save ldap content in json format
 
+## Analysis console
+
+![](./.github/analysis.png)
+
 ## Debug mode
 
 ![](./.github/debug.png)
