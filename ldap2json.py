@@ -340,6 +340,13 @@ def ldap3_kerberos_login(connection, target, user, password, domain='', lmhash='
 
     return True
 
+def bytessize(data):
+    l = len(data)
+    units = ['B','kB','MB','GB','TB','PB']
+    for k in range(len(units)):
+        if l < (1024**(k+1)):
+            break
+    return "%4.2f %s" % (round(l/(1024**(k)),2), units[k])
 
 def parse_args():
     parser = argparse.ArgumentParser(add_help=True, description='Python (re)setter for property msDS-KeyCredentialLink for Shadow Credentials attacks.')
@@ -434,4 +441,4 @@ if __name__ == '__main__':
     f = open(args.jsonfile, 'w')
     f.write(json_data)
     f.close()
-    print("[>] Written %d bytes to %s" % (len(json_data), args.jsonfile))
+    print("[>] Written %s bytes to %s" % (bytessize(json_data), args.jsonfile))
