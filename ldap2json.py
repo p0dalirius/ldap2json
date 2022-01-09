@@ -400,8 +400,9 @@ if __name__ == '__main__':
     if args.debug:
         print("[>] Authentication successful!")
 
+    print("[>] Extracting all objects from LDAP ...")
+    
     data = {}
-
     for naming_context in ldap_server.info.naming_contexts:
         if args.debug:
             print("[>] Querying (objectClass=*) to LDAP on %s ..." % naming_context)
@@ -429,10 +430,8 @@ if __name__ == '__main__':
     if args.debug:
         print("[>] JSON data generated.")
 
-    if args.debug:
-        print("[>] Writing json data to %s" % args.jsonfile)
+    print("[>] Writing json data to %s" % args.jsonfile)
     f = open(args.jsonfile, 'w')
     f.write(json_data)
     f.close()
-    if args.debug:
-        print("[>] Written %d bytes to %s" % (len(json_data), args.jsonfile))
+    print("[>] Written %d bytes to %s" % (len(json_data), args.jsonfile))
