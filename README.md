@@ -11,9 +11,11 @@ The ldap2json script allows you to extract the whole LDAP content of a Windows d
  - [x] Authenticate with kerberos ticket
  - [x] Save ldap content in json format
 
-## Analysis console
+## LDAP offline analysis tool
 
-![](./.github/analysis.png)
+This analysis console offers multiple ways of searching LDAP objects from a JSON file. You can search for objects, property names or property values in the console.
+
+![](./analysis/screenshots/analysis.png)
 
 ## Debug mode
 
