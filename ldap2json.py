@@ -349,7 +349,7 @@ def bytessize(data):
     return "%4.2f %s" % (round(l/(1024**(k)),2), units[k])
 
 def parse_args():
-    parser = argparse.ArgumentParser(add_help=True, description='Python (re)setter for property msDS-KeyCredentialLink for Shadow Credentials attacks.')
+    parser = argparse.ArgumentParser(add_help=True, description='The ldap2json script allows you to extract the whole LDAP content of a Windows domain into a JSON file.')
     parser.add_argument('--use-ldaps', action='store_true', help='Use LDAPS instead of LDAP')
     parser.add_argument("-q", "--quiet", dest="quiet", action="store_true", default=False, help="show no information at all")
     parser.add_argument("-debug", dest="debug", action="store_true", default=False, help="Debug mode")
