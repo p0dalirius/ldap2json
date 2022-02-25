@@ -1,12 +1,14 @@
 # ldap2json
 
 <p align="center">
+  The ldap2json script allows you to extract the whole LDAP content of a Windows domain into a JSON file.
+  <br>
+  <img src="https://badges.pufler.dev/visits/p0dalirius/ldap2json/"/>
   <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/p0dalirius/ldap2json">
   <a href="https://twitter.com/intent/follow?screen_name=podalirius_" title="Follow"><img src="https://img.shields.io/twitter/follow/podalirius_?label=Podalirius&style=social"></a>
   <br>
 </p>
 
-The ldap2json script allows you to extract the whole LDAP content of a Windows domain into a JSON file.
 
 ![](./.github/example.png)
 
