@@ -8,6 +8,7 @@ from binascii import unhexlify
 from impacket.smbconnection import SMBConnection, SMB2_DIALECT_002, SMB2_DIALECT_21, SMB_DIALECT, SessionError
 from impacket.spnego import SPNEGO_NegTokenInit, TypesMech
 from ldap3.protocol.formatters.formatters import format_sid
+from ldap3.protocol.microsoft import security_descriptor_control
 import argparse
 import datetime
 import json
@@ -96,10 +97,11 @@ class LDAPConsole(object):
             # https://ldap3.readthedocs.io/en/latest/searches.html#the-search-operation
             paged_response = True
             paged_cookie = None
-            while paged_response == True:
+            controls = security_descriptor_control(sdflags=0x04)
+            while paged_response:
                 self.ldap_session.search(
                     self.target_dn, query, attributes=attributes,
-                    size_limit=0, paged_size=1000, paged_cookie=paged_cookie
+                    size_limit=0, paged_size=1000, paged_cookie=paged_cookie, controls=controls
                 )
                 if "controls" in self.ldap_session.result.keys():
                     if "1.2.840.113556.1.4.319" in self.ldap_session.result["controls"].keys():
