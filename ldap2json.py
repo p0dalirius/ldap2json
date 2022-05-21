@@ -27,28 +27,18 @@ def cast_to_dict(cid):
         if type(value) == bytes:
             out[key] = str(value)
         elif type(value) == list:
-            if len(value) == 1:
-                value = value[0]
-                if type(value) == bytes:
-                    out[key] = str(value)
-                elif type(value) == datetime.datetime:
-                    out[key] = value.strftime('%Y-%m-%d %T')
-                elif type(value) == datetime.timedelta:
+            newlist = []
+            for element in value:
+                if type(element) == bytes:
+                    newlist.append(str(element))
+                elif type(element) == datetime.datetime:
+                    newlist.append(element.strftime('%Y-%m-%d %T'))
+                elif type(element) == datetime.timedelta:
                     # Output format to change
-                    out[key] = value.seconds
+                    newlist.append(element.seconds)
                 else:
-                    out[key] = value
-            else:
-                newlist = []
-                for element in value:
-                    if type(element) == bytes:
-                        newlist.append(str(element))
-                    elif type(element) == datetime.datetime:
-                        newlist.append(element.strftime('%Y-%m-%d %T'))
-                    elif type(element) == datetime.timedelta:
-                        # Output format to change
-                        newlist.append(element.seconds)
-                out[key] = newlist
+                    newlist.append(str(element))
+            out[key] = newlist
         elif type(value) == datetime.datetime:
             out[key] = value.strftime('%Y-%m-%d %T')
         elif type(value) == datetime.timedelta:
