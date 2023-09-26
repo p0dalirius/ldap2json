@@ -1,4 +1,4 @@
-# ldap2json
+![](./.github/banner.png)
 
 <p align="center">
   The ldap2json script allows you to extract the whole LDAP content of a Windows domain into a JSON file.
@@ -14,10 +14,10 @@
 
 ## Features
 
- - [x] Authenticate with password
- - [x] Authenticate with LM:NT hashes
- - [x] Authenticate with kerberos ticket
- - [x] Save ldap content in json format
+ - [x] Authenticate with password.
+ - [x] Authenticate with LM:NT hashes.
+ - [x] Authenticate with kerberos ticket.
+ - [x] Save LDAP content in json format.
 
 ## LDAP offline analysis tool
 
