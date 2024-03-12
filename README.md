@@ -19,6 +19,12 @@
  - [x] Authenticate with kerberos ticket.
  - [x] Save LDAP content in json format.
 
+## Presentation and demonstration
+
+<p align="center">
+  <a href="https://www.youtube.com/watch?v=ct1ovt0hEAw" title="Dumping your LDAP to a JSON file with ldap2json.py"><img src="https://raw.githubusercontent.com/p0dalirius/ldap2json/master/.github/youtube_preview.png"></a>
+</p>
+
 ## LDAP offline analysis tool
 
 This analysis console offers multiple ways of searching LDAP objects from a JSON file. You can search for objects, property names or property values in the console.
