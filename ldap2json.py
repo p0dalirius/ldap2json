@@ -157,10 +157,7 @@ if __name__ == '__main__':
         )
 
         if options.debug:
-            print("[>] LDAP query (objectClass=*) returned %d objects" % len(response))
-
-        if options.debug:
-            print("[>] Parsing data ...")
+            print("  | LDAP query (objectClass=*) returned %d objects" % len(response))
 
         for cn in response:
             path = cn.split(',')[::-1]
