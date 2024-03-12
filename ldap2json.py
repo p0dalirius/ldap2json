@@ -62,12 +62,13 @@ def parseArgs():
     parser = argparse.ArgumentParser(add_help=True, description='The ldap2json script allows you to extract the whole LDAP content of a Windows domain into a JSON file.')
     parser.add_argument('--use-ldaps', action='store_true', help='Use LDAPS instead of LDAP')
     parser.add_argument("-q", "--quiet", dest="quiet", action="store_true", default=False, help="show no information at all")
-    parser.add_argument("-debug", dest="debug", action="store_true", default=False, help="Debug mode")
+    parser.add_argument("--debug", dest="debug", action="store_true", default=False, help="Debug mode")
     parser.add_argument("-o", "--outfile", dest="jsonfile", default="ldap.json", help="Output JSON file. (default: ldap.json)")
     parser.add_argument("-b", "--base", dest="searchbase", default=None, help="Search base for LDAP query.")
 
     authconn = parser.add_argument_group('authentication & connection')
     authconn.add_argument('--dc-ip', action='store', metavar="ip address", help='IP Address of the domain controller or KDC (Key Distribution Center) for Kerberos. If omitted it will use the domain part (FQDN) specified in the identity parameter')
+    authconn.add_argument('--kdcHost', dest="kdcHost", action='store', metavar="FQDN KDC", help='FQDN of KDC for Kerberos.')
     authconn.add_argument("-d", "--domain", dest="auth_domain", metavar="DOMAIN", action="store", help="(FQDN) domain to authenticate to")
     authconn.add_argument("-u", "--user", dest="auth_username", metavar="USER", action="store", help="user to authenticate with")
 
