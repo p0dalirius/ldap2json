@@ -360,20 +360,20 @@ def parse_args():
     cred.add_argument("-H", "--hashes", dest="auth_hashes", action="store", metavar="[LMHASH:]NTHASH", help='NT/LM hashes, format is LMhash:NThash')
     cred.add_argument('--aes-key', dest="auth_key", action="store", metavar="hex key", help='AES key to use for Kerberos Authentication (128 or 256 bits)')
     secret.add_argument("-k", "--kerberos", dest="use_kerberos", action="store_true", help='Use Kerberos authentication. Grabs credentials from .ccache file (KRB5CCNAME) based on target parameters. If valid credentials cannot be found, it will use the ones specified in the command line')
-
-    if options.auth_password is None and options.no_pass == False and options.auth_hashes is None:
-        print("[+] No password of hashes provided and --no-pass is '%s'" % options.no_pass)
-        from getpass import getpass
-        if options.auth_domain is not None:
-            options.auth_password = getpass("  | Provide a password for '%s\\%s':" % (options.auth_domain, options.auth_username))
-        else:
-            options.auth_password = getpass("  | Provide a password for '%s':" % options.auth_username)
     
     if len(sys.argv) == 1:
         parser.print_help()
         sys.exit(1)
-
+        
     args = parser.parse_args()
+    
+    if args.auth_password is None and args.no_pass == False and args.auth_hashes is None:
+        print("[+] No password of hashes provided and --no-pass is '%s'" % args.no_pass)
+        from getpass import getpass
+        if args.auth_domain is not None:
+            args.auth_password = getpass("  | Provide a password for '%s\\%s':" % (args.auth_domain, args.auth_username))
+        else:
+            args.auth_password = getpass("  | Provide a password for '%s':" % args.auth_username)
 
     return args
 
