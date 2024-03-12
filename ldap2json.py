@@ -60,25 +60,25 @@ def bytessize(data):
 
 def parseArgs():
     parser = argparse.ArgumentParser(add_help=True, description="The ldap2json script allows you to extract the whole LDAP content of a Windows domain into a JSON file.")
-    parser.add_argument("--use-ldaps", action="store_true", help="Use LDAPS instead of LDAP")
-    parser.add_argument("-q", "--quiet", dest="quiet", action="store_true", default=False, help="show no information at all")
-    parser.add_argument("--debug", dest="debug", action="store_true", default=False, help="Debug mode")
-    parser.add_argument("-o", "--outfile", dest="jsonfile", default="ldap.json", help="Output JSON file. (default: ldap.json)")
+    parser.add_argument("--use-ldaps", action="store_true", help="Use LDAPS instead of LDAP.")
+    parser.add_argument("-q", "--quiet", dest="quiet", action="store_true", default=False, help="Show no information at all.")
+    parser.add_argument("--debug", dest="debug", action="store_true", default=False, help="Debug mode.")
+    parser.add_argument("-o", "--outfile", dest="jsonfile", default="ldap.json", help="Output JSON file. (default: ldap.json).")
     parser.add_argument("-b", "--base", dest="searchbase", default=None, help="Search base for LDAP query.")
 
     authconn = parser.add_argument_group("authentication & connection")
-    authconn.add_argument("--dc-ip", action="store", metavar="ip address", help="IP Address of the domain controller or KDC (Key Distribution Center) for Kerberos. If omitted it will use the domain part (FQDN) specified in the identity parameter")
+    authconn.add_argument("--dc-ip", action="store", metavar="ip address", help="IP Address of the domain controller or KDC (Key Distribution Center) for Kerberos. If omitted it will use the domain part (FQDN) specified in the identity parameter.")
     authconn.add_argument("--kdcHost", dest="kdcHost", action="store", metavar="FQDN KDC", help="FQDN of KDC for Kerberos.")
-    authconn.add_argument("-d", "--domain", dest="auth_domain", metavar="DOMAIN", action="store", help="(FQDN) domain to authenticate to")
-    authconn.add_argument("-u", "--user", dest="auth_username", metavar="USER", action="store", help="user to authenticate with")
+    authconn.add_argument("-d", "--domain", dest="auth_domain", metavar="DOMAIN", action="store", help="(FQDN) domain to authenticate to.")
+    authconn.add_argument("-u", "--user", dest="auth_username", metavar="USER", action="store", help="user to authenticate with.")
 
     secret = parser.add_argument_group()
     cred = secret.add_mutually_exclusive_group()
-    cred.add_argument("--no-pass", action="store_true", help="Don't ask for password (useful for -k)")
-    cred.add_argument("-p", "--password", dest="auth_password", metavar="PASSWORD", action="store", help="password to authenticate with")
-    cred.add_argument("-H", "--hashes", dest="auth_hashes", action="store", metavar="[LMHASH:]NTHASH", help="NT/LM hashes, format is LMhash:NThash")
-    cred.add_argument("--aes-key", dest="auth_key", action="store", metavar="hex key", help="AES key to use for Kerberos Authentication (128 or 256 bits)")
-    secret.add_argument("-k", "--kerberos", dest="use_kerberos", action="store_true", help="Use Kerberos authentication. Grabs credentials from .ccache file (KRB5CCNAME) based on target parameters. If valid credentials cannot be found, it will use the ones specified in the command line")
+    cred.add_argument("--no-pass", action="store_true", help="Don't ask for password (useful for -k).")
+    cred.add_argument("-p", "--password", dest="auth_password", metavar="PASSWORD", action="store", help="Password to authenticate with.")
+    cred.add_argument("-H", "--hashes", dest="auth_hashes", action="store", metavar="[LMHASH:]NTHASH", help="NT/LM hashes, format is LMhash:NThash.")
+    cred.add_argument("--aes-key", dest="auth_key", action="store", metavar="hex key", help="AES key to use for Kerberos Authentication (128 or 256 bits).")
+    secret.add_argument("-k", "--kerberos", dest="use_kerberos", action="store_true", help="Use Kerberos authentication. Grabs credentials from .ccache file (KRB5CCNAME) based on target parameters. If valid credentials cannot be found, it will use the ones specified in the command line.")
     
     if len(sys.argv) == 1:
         parser.print_help()
