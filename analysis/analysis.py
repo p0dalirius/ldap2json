@@ -182,13 +182,43 @@ if __name__ == '__main__':
                 if options.debug == True:
                     print("[debug] Changed searchbase to %s" % ','.join(base))
 
+            elif cmd[0].lower() == "search_for_kerberoastable_users":
+                _results = []
+                _data = dict_path_access(ldapdata, base)
+
+                _results = search_for_property_by_name(_data, "servicePrincipalName")
+
+                for user in _results:
+                    if 'CN=krbtgt' not in user["path"] and 'CN=Users' in user["path"]:                        
+                        print("[\x1b[93m%s\x1b[0m] => \x1b[94m%s\x1b[0m\n - \x1b[92m%s\x1b[0m" % (
+                            ','.join(user["path"][::-1] + base[::-1]),
+                            user["property"],
+                            user["value"],
+                        ))
+
+            elif cmd[0].lower() == "search_for_asreproastable_users":
+                _results = []
+                _data = dict_path_access(ldapdata, base)
+
+                _results = search_for_property_by_name(_data, "UserAccountControl")
+
+                for user in _results:
+                    if user["value"] & 0x400000:
+                        print("[\x1b[93m%s\x1b[0m] => \x1b[94m%s\x1b[0m\n - \x1b[92m%s\x1b[0m" % (
+                            ','.join(user["path"][::-1] + base[::-1]),
+                            user["property"],
+                            user["value"],
+                        ))
+
             elif cmd[0].lower() == "help":
-                print(" - %-15s %s " % ("searchbase", "Sets the LDAP search base."))
-                print(" - %-15s %s " % ("object_by_property_name", "Search for an object containing a property by name in LDAP."))
-                print(" - %-15s %s " % ("object_by_property_value", "Search for an object containing a property by value in LDAP."))
-                print(" - %-15s %s " % ("object_by_dn", "Search for an object by its distinguishedName in LDAP."))
-                print(" - %-15s %s " % ("help", "Displays this help message."))
-                print(" - %-15s %s " % ("exit", "Exits the script."))
+                print(" - %-35s %s " % ("searchbase", "Sets the LDAP search base."))
+                print(" - %-35s %s " % ("object_by_property_name", "Search for an object containing a property by name in LDAP."))
+                print(" - %-35s %s " % ("object_by_property_value", "Search for an object containing a property by value in LDAP."))
+                print(" - %-35s %s " % ("object_by_dn", "Search for an object by its distinguishedName in LDAP."))
+                print(" - %-35s %s " % ("search_for_kerberoastable_users", "Search for users accounts linked to at least one service in LDAP."))
+                print(" - %-35s %s " % ("search_for_asreproastable_users", "Search for users with DONT_REQ_PREAUTH parameter set to True in LDAP."))
+                print(" - %-35s %s " % ("help", "Displays this help message."))
+                print(" - %-35s %s " % ("exit", "Exits the script."))
             else:
                 print("Unknown command. Type 'help' for help.")
         except KeyboardInterrupt as e:
