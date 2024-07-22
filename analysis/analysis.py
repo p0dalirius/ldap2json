@@ -106,6 +106,12 @@ def parseArgs():
     parser.add_argument("-d", "--debug", default=False, action="store_true", help='Debug mode.')
     return parser.parse_args()
 
+def enhanced_print(data, base):
+    print("[\x1b[93m%s\x1b[0m] => \x1b[94m%s\x1b[0m\n - \x1b[92m%s\x1b[0m" % (
+        ','.join(data["path"][::-1] + base[::-1]),
+        data["property"],
+        data["value"],
+    ))
 
 if __name__ == '__main__':
     options = parseArgs()
@@ -150,11 +156,7 @@ if __name__ == '__main__':
                     print("\x1b[91mNo such property found.\x1b[0m")
                 else:
                     for result in _results:
-                        print("[\x1b[93m%s\x1b[0m] => \x1b[94m%s\x1b[0m\n - \x1b[92m%s\x1b[0m" % (
-                            ','.join(result["path"][::-1] + base[::-1]),
-                            result["property"],
-                            result["value"],
-                        ))
+                        enhanced_print(result, base)
 
             elif cmd[0].lower() == "object_by_property_value":
                 _property_value = ' '.join(cmd[1:])
@@ -168,11 +170,7 @@ if __name__ == '__main__':
                     print("\x1b[91mNo property with specified value found.\x1b[0m")
                 else:
                     for result in _results:
-                        print("[\x1b[93m%s\x1b[0m] => \x1b[94m%s\x1b[0m\n - \x1b[92m%s\x1b[0m" % (
-                            ','.join(result["path"][::-1] + base[::-1]),
-                            result["property"],
-                            result["value"],
-                        ))
+                        enhanced_print(result, base)
 
             elif cmd[0].lower() == "searchbase":
                 _base = ' '.join(cmd[1:])
@@ -190,11 +188,7 @@ if __name__ == '__main__':
 
                 for user in _results:
                     if 'CN=krbtgt' not in user["path"] and 'CN=Users' in user["path"]:                        
-                        print("[\x1b[93m%s\x1b[0m] => \x1b[94m%s\x1b[0m\n - \x1b[92m%s\x1b[0m" % (
-                            ','.join(user["path"][::-1] + base[::-1]),
-                            user["property"],
-                            user["value"],
-                        ))
+                        enhanced_print(user, base)
 
             elif cmd[0].lower() == "search_for_asreproastable_users":
                 _results = []
@@ -204,11 +198,7 @@ if __name__ == '__main__':
 
                 for user in _results:
                     if user["value"] & 0x400000:
-                        print("[\x1b[93m%s\x1b[0m] => \x1b[94m%s\x1b[0m\n - \x1b[92m%s\x1b[0m" % (
-                            ','.join(user["path"][::-1] + base[::-1]),
-                            user["property"],
-                            user["value"],
-                        ))
+                        enhanced_print(user, base)
 
             elif cmd[0].lower() == "help":
                 print(" - %-35s %s " % ("searchbase", "Sets the LDAP search base."))
