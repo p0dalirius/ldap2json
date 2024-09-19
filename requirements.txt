@@ -1,3 +1,4 @@
 impacket
 ldap3
 sectools
+pycryptodome
