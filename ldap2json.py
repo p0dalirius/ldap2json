@@ -168,7 +168,7 @@ if __name__ == '__main__':
                 else:
                     tmp[key] = {}
                     tmp = tmp[key]
-            if [path[-1]] in tmp:
+            if path[-1] in tmp:
                 tmp[path[-1]].update(cast_to_dict(response[cn]))
             else:
                 tmp[path[-1]] = cast_to_dict(response[cn])
