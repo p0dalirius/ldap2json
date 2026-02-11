@@ -5,7 +5,7 @@
 # Date created       : 22 Dec 2021
 
 
-from sectools.windows.ldap import init_ldap_session, raw_ldap_query
+from sectools.windows.ldap.ldap import init_ldap_session, raw_ldap_query
 import argparse
 import datetime
 import json
